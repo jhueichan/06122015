@@ -11,7 +11,17 @@
     <link href="css/sb-admin.css" rel="stylesheet"> 
     <link href="css/plugins/morris.css" rel="stylesheet">  
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-   
+   <style>
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 2px;
+} 
+</style>
     
     
     <title>Sistema Web Vialis</title>
@@ -28,45 +38,15 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="row">
-                    <div class="col-lg-4">
-                        <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
-                        
-                        
+                   <div class="col-lg-12">
                       
-
-                    </div>
-                      <div class="col-lg-4">
-                        <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
+                       <p> Bienvenido Systema VIALIS</p>
+                       <hr>
+                      <img src="images/maquinas.png"  height="auto" width="auto">  
                         
                         
-                      
-
                     </div>
-                    <div class="col-lg-4">
-                     <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
-                         <% //@ include file="dePrueba.jsp" %> 
-                   </div>
+                                        
                 </div><!-- /.row -->   
 
             </div> <!-- /.container-fluid -->

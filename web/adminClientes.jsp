@@ -41,7 +41,6 @@
                                         <th>Afp</th>
                                         <th>Previsión</th>
                                         <th>Rol</th>
-                                         <th>Acciones</th>
                                         </thead>
                                         <tbody>
                                             <s:iterator value="records" var="dato" status="estado">
@@ -53,9 +52,9 @@
                                                     <td><s:property value="direccion" /></td>
                                                     <td><s:property value="telefono" /></td>
                                                     <td><s:property value="email" /></td>
-                                                    <td><s:property value="afp.nombre" /></td>
-                                                    <td><s:property value="prevision.prevision" /></td>
-                                                    <td><s:property value="rol.nombres" /></td>
+                                                    <td><s:property value="afp_id.nombre" /></td>
+                                                    <td><s:property value="prevision_id.prevision" /></td>
+                                                    <td><s:property value="rol_id.nombres" /></td>
                                                     <td>
                                                         <s:url id="url" action="buscarEmpleado">
                                                             <s:param name="codigoEmpleado">
@@ -73,13 +72,9 @@
                                             </s:iterator>
                                         </tbody>
                                     </table>
-                                     </div>
+                                    <sj:datepicker name="calendario" label="Calendario" displayFormat="dd/mm/yy"></sj:datepicker>     
+                                    </div>
                                     
-                                
-                                
-                                
-                                
-                                
                                     <div id="tabIngresoEmpleados">
                                     <s:form action="ingresarEmpleado" theme="bootstrap" label="Ingrese Empleados">
                                         <s:textfield

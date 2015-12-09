@@ -1,12 +1,11 @@
 package com.model;
-import java.sql.Date;
 
 public class Empleado {
      private String rut;
      private String nombres;
      private String apellidos;
      private String direccion;
-     private Date fechaNac;
+     private String fechaNac;
      private String cargasFam;
      private String telefono;
      private String email;
@@ -56,14 +55,15 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    public Date getFechaNac() {
+    public String getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 
+    
     public String getCargasFam() {
         return cargasFam;
     }

@@ -2,6 +2,7 @@
 package com.model;
 
 public class DetallePagina {
+      int id;
       Pagina pagina;
       Rol rol;
 
@@ -10,7 +11,7 @@ public class DetallePagina {
     }
 
     public Pagina getPagina() {
-        return pagina;
+        return pagina; 
     }
 
     public void setPagina(Pagina pagina) {
@@ -23,6 +24,14 @@ public class DetallePagina {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
       
       

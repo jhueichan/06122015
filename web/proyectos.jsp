@@ -50,16 +50,15 @@
                                                     <td><s:property value="ingeniero_originador.nombres" /></td>
                                                     <td><s:property value="jefe_proyecto.nombres" /></td>
                                                     <td>
-                                                           <s:url id="url" action="buscaPorCodigo">
-                                                                <s:param name="codigoMaterial">
-                                                                    <s:property value="codigo"></s:property>                                                                    
+                                                           <s:url id="url" action="asignarTareas">
+                                                                <s:param name="idProyecto">
+                                                                    <s:property value="id"></s:property>                                                                    
                                                                 </s:param>                                                               
                                                             </s:url>
-                                                        <s:a href="%{url}" cssClass="fs1" aria-hidden="true" >Asignar Tareas</s:a>
+                                                        <s:a href="%{url}" cssClass="fs1" aria-hidden="true" >Asignar Tareas</s:a>                                                
                                                             
-                                                            
-                                                        <s:a action="eliminarMaterialAccion">
-                                                            <s:param name="codigo" value="codigo" />
+                                                        <s:a action="eliminarProyecto">
+                                                            <s:param name="idProyecto" value="id" />
                                                             <i class="glyphicon glyphicon-trash"></i>
                                                         </s:a>    
                                                     </td>
@@ -90,8 +89,7 @@
                                         <br>
                                         <s:submit value="Grabar datos" cssClass="btn btn-primary"/>
                                     </s:form>
-                                </div>
-                                
+                                </div>                 
                                 
      
                                 

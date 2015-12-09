@@ -1,60 +1,117 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.action;
 
+import com.dao.DaoEmpleado;
+import com.dao.DaoPagina;
+import com.dao.DaoPrivilegiosPagina;
+import com.model.Empleado;
+import com.model.PrivilegiosPagina;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
-/**
- *
- * @author christian
- */
+
 public class IngresoAction extends ActionSupport{
+      
+    
+      public final DaoPagina daoPagina= new DaoPagina();
+      public String rutIngresado;
+      public String passwordIngresada;      
+      public List<PrivilegiosPagina> listarPaginas;
+   
+      
+      public boolean credencialesVacias(){
+          if (rutIngresado==null || passwordIngresada==null) {
+             return true;
+          } else {
+              return false;
+          }     
+      }
+      
+      
+      
+      public String IniciarSesion() throws Exception{
+          
+          Empleado empleado=new Empleado();
+          DaoEmpleado  daoEmpleado = new DaoEmpleado();
+          if (credencialesVacias()) {
+              addActionMessage("error, Ingrese credenciales ");            
+              return ERROR;           
+          } else {
+                     try { 
+                         empleado = daoEmpleado.buscarPorID(rutIngresado);
+                         System.out.println("nombre emp: "+empleado.getNombres());
+                         System.out.println("emp password"+empleado.getPassword());
+                         System.out.println("pas de la jsp"+passwordIngresada);
+                      } catch (Exception e) {
+                          addActionMessage("el usuario no existe, ingrese un rut valido");        
+                          System.out.println(e.getMessage());  
+                          return ERROR;      
+                      }
+
+                     if (passwordIngresada.equals(empleado.getPassword())) {
+                        System.out.println("los rut son iguales ");    
+                        DaoPrivilegiosPagina daoPrivilegiosPagina= new DaoPrivilegiosPagina();                 
+                        listarPaginas= daoPrivilegiosPagina.ListaPriviPaginaPorRol(empleado.getRol());
+                        
+                         Map <String, Object> sesionEmpleado = ActionContext.getContext().getSession();
+                         sesionEmpleado.put("sesionEmpleado", empleado);                      
+                         addActionMessage("Bienvenido : " + empleado.getNombres()+" "+empleado.getApellidos());   
+                         return SUCCESS;  
+                    } else {           
+                          addActionError("la  password son Incorrectos");
+                          return ERROR;      
+                    }        
+          }         
+    } 
+      
+      
+      
+      
+    public String cerrarSesion() {
+        try {
+            Map sessionLogout = ActionContext.getContext().getSession();
+            sessionLogout.remove("sesionEmpleado");
+            addActionMessage("Has salido de su sesion");
+            return SUCCESS;
+        } catch (Exception e) {
+             System.out.println("error valida en el action ----> CerrarSesion"+e.getMessage());
+             return SUCCESS;
+        }
+       
+       
+     }
+
+
+    public String getRutIngresado() {
+        return rutIngresado;
+    }
+
+    public void setRutIngresado(String rutIngresado) {
+        this.rutIngresado = rutIngresado;
+    }
+
+    public String getPasswordIngresada() {
+        return passwordIngresada;
+    }
+
+    public void setPasswordIngresada(String passwordIngresada) {
+        this.passwordIngresada = passwordIngresada;
+    }
+
+    public List<PrivilegiosPagina> getLista() {
+        return listarPaginas;
+    }
+
+    public void setLista(List<PrivilegiosPagina> lista) {
+        this.listarPaginas = lista;
+    }
+
  
-private String email_usuario;
-private String clave;
 
-    public String getEmail_usuario() {
-        return email_usuario;
-    }
-
-    public void setEmail_usuario(String email_usuario) {
-        this.email_usuario = email_usuario;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
  
     
-    public String validar() throws SQLException, ClassNotFoundException{
-        String ir = ERROR;
-        boolean status=false; 
-       //Class.forName("oracle.jdbc.driver.OracleDriver");
-       Class.forName("oracle.jdbc.driver.OracleDriver");
-   Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","PORTAFOLIO","1234");  
-     
-   PreparedStatement ps=con.prepareStatement("select * from usuario where email_usuario=? and clave=?");  
-   ps.setString(1,email_usuario);  
-   ps.setString(2,clave);  
-   ResultSet rs=ps.executeQuery();  
-   status=rs.next();  
-        if (status) {
-            ir = SUCCESS;
-        }
-        return ir;
-    }
 }

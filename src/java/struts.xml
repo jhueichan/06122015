@@ -26,19 +26,18 @@
         </action>
      <!--  FIN de acciones de materiales --> 
      <!-- XML DE LOGEO Y LOGOUT -->    
-   <action name="logeoXML" class="com.action.MetodosAction" method="IniciarSesion">
-        <result name="success">/Bienvenido.jsp</result>
-        <result name="error">/login.jsp</result>
-    </action>
+
     
-    <action name="cerrarSesionXML" class="com.action.MetodosAction" method="cerrarSesion">
-        <result name="success">/login.jsp</result>
+    <action name="loginAction" class="com.action.IngresoAction" method="IniciarSesion">
+        <result name="success">/index.jsp</result>
         <result name="error">/login.jsp</result>
-    </action>
-    <action name="AyudaXML" class="com.action.MetodosAction" method="cerrarSesion">
-        <result name="success">/Ayuda.jsp</result>
-        <result name="error">/Ayuda.jsp</result>
-    </action>    
+     </action>
+     
+    <action name="cerrarSesionXML" class="com.action.IngresoAction" method="cerrarSesion">
+        <result name="success">/login.jsp</result>
+        <result name="error">/index.jsp</result>
+     </action>
+        
 
 <!--    acciones del proyecto  --> 
           <action name="crearProyecto" class="com.action.ProyectosAction" method="iniciarFormulario">
@@ -52,6 +51,9 @@
       <action name="consultarProyectos" class="com.action.ProyectosAction" method="list">
             <result name="success">/proyectos.jsp</result>
        </action>
+       <action name="asignarTareas" class="com.action.TareaAction" method="asignarTareas">
+            <result name="success">/asignarTareas.jsp</result>
+       </action>
      
         
     
@@ -63,11 +65,39 @@
         <action name="listaCiudades" class="com.action.CiudadAction" method="list">
             <result name="success">/ciudades.jsp</result>
         </action>         
+    
         
+                
   <!--     Gestion  de un empleado   -->
+
         <action name="listadoEmpleados" class="com.action.EmpleadoAction" method="list">
              <result name="success">/adminEmpleados.jsp</result>
-          
+         </action>
+         
+         <action name="ingresarEmpleado" class="com.action.EmpleadoAction" method="create">
+             <result type="chain">listadoEmpleados</result>
+         </action>
+         
+         <action name="actualizarEmpleado" class="com.action.EmpleadoAction" method="update">
+             <result type="chain">listadoEmpleados</result>
+         </action>
+         
+         <action name="eliminarEmpleado" class="com.action.EmpleadoAction" method="delete">
+             <result type="chain">listadoEmpleados</result>
+         </action>
+         
+         <action name="empleado" class="com.action.EmpleadoAction" method="execute">
+             <result name="success">/adminEmpleados.jsp</result>
+         </action>
+         
+        <action name="buscarEmpleado" class="com.action.EmpleadoAction" method="buscaEmpleado">
+             <result type="chain">listadoEmpleados</result>
+         </action> 
+         
+        <!--     Cliente   -->
+         
+          <action name="listadoClientes" class="com.action.EmpleadoAction" method="list">
+             <result name="success">/adminClientes.jsp</result>
          </action>
 
   <!--     Gestion de maquinarias    -->
@@ -75,10 +105,7 @@
              <result name="success">/maquinarias.jsp</result>            
          </action>  
 
-          <action name="login" class="com.action.IngresoAction" method="validar">
-            <result>/index.jsp</result>
-        </action>
-
+    
   
     </package>
 </struts>

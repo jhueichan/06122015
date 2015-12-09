@@ -4,7 +4,7 @@ package com.model;
 public class Rol {
     private  int id;
     private String nombres;
-    private String privilegios;
+    private Privilegios  privilegios;
 
     public Rol() {
     }
@@ -25,14 +25,15 @@ public class Rol {
         this.nombres = nombres;
     }
 
-    public String getPrivilegios() {
+    public Privilegios getPrivilegios() {
         return privilegios;
     }
 
-    public void setPrivilegios(String privilegios) {
+    public void setPrivilegios(Privilegios privilegios) {
         this.privilegios = privilegios;
     }
-    
+
+ 
     
     
 }

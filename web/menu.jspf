@@ -12,20 +12,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp">SB Admin</a>
+        <a class="navbar-brand" href="index.jsp">Administración Sistema Vialis</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">   <!-- inicio de los Datos del usuario logeado -->             
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Sr. Usuario <b class="caret"></b></a><!--  aca debe cambiar el nombre dinamicamente--> 
-            <ul class="dropdown-menu">  
-                <li>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogeo" >Abrir la sesion</button>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-default">Cerrar la sesion</button>
-                </li>
-            </ul>
         </li>
     </ul> <!-- Fin  de lso Datos del usuario logeado -->   
 
@@ -33,57 +25,18 @@
     <!-- Elementos del menú de la barra lateral - Estos colapso al menú de navegación sensible en pantallas pequeñas -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Panel Principal</a>
-            </li>
-            <li>
-                <s:a action="materialesAccion" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-shopping-cart"></i> Materiales</s:a>
-                </li> 
-                           
-                <li>
-                <s:a action="listadoEmpleados" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-folder-open"></i> Empleados</s:a>
-             </li>  
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#menuChico"><i class="fa fa-fw fa-arrows-v"></i> Proyectos <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="menuChico" class="collapse">
-              <li>
-                <s:a action="crearProyecto" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-folder-open"></i> Crear Proyectos</s:a>
-             </li> 
-                <li>
-                <s:a action="consultarProyectos" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-folder-open"></i> Consultar Proyectos</s:a>
-             </li> 
-              <li>
-                <s:a action="asignarTareas" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-folder-open"></i> Asignar Tareas</s:a>
-             </li> 
-                    </ul>
-                </li>
+            
+         
+            <!--   generacion de menu dinámico  ---->
+             <s:iterator value="listarPaginas">             
+                <h3><s:a action="%{pagina.url_}" forceAddSchemeHostAndPort="true"><i class="glyphicon glyphicon-folder-open"></i> <s:property value="%{pagina.titulo}"></s:property></s:a>
+                </h3>
+                     
+             </s:iterator>
+              <!--  fin de menu dinámico  ---->                   
 
             </ul>
         </div>
 
     </nav><!--  fin del menu de navegacion /.navbar-collapse -->
 
-    <div class="modal fade" id="modalLogeo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-
-
-
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <s:form action="logeoXML" cssStyle="login-wrapper">     
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">Acceso al sistema Vialis</h4>
-                </div>  
-                 
-                        <s:textfield label="usuario" name="usu" placeholder="Email" required="required" class="form-control" >
-                        </s:textfield>
-                        <s:password label="exampleInputPassword1" name="cla" cssClass="input span12 password" placeholder="Password" required="required">
-                           
-                        </s:password>
-               <s:submit cssClass="btn btn-primary bottom-margin" value="Ingresar"></s:submit>
-       
-              </s:form>
-        </div>
-    
-    </div>
-</div>

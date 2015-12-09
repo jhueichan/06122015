@@ -1,7 +1,10 @@
 
 package com.dao;
+import com.model.Pagina;
+import com.model.Privilegios;
 import com.model.Rol;
 import com.service.RolInterface;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +14,11 @@ import java.util.List;
 
 
 public class DaoRol implements RolInterface{
-    PreparedStatement pStmt; 
-
+    PreparedStatement pStmt;      
+    CallableStatement csts;
+    DaoPrivilegios daoPrivilegios= new  DaoPrivilegios();
+             
+    
     public DaoRol() {
     }
 
@@ -41,8 +47,9 @@ public class DaoRol implements RolInterface{
 		while (rs.next()) {
 			Rol rol = new Rol();
 			rol.setId(rs.getInt(1));
-			rol.setNombres(rs.getString(2));                        
-                        rol.setPrivilegios(rs.getString(3)); 
+			rol.setNombres(rs.getString(2));   
+                        Privilegios pri=daoPrivilegios.buscarPorID(rs.getInt(3));
+                        rol.setPrivilegios(pri); 
                         roles.add(rol);	
                 }
 	} catch (SQLException e) {
@@ -57,7 +64,7 @@ public class DaoRol implements RolInterface{
        try {
         	pStmt = dbConnection.prepareStatement(insertQuery);             
 		pStmt.setString(1, obj.getNombres());	
-                pStmt.setString(2, obj.getPrivilegios());	
+                pStmt.setInt(2, obj.getId());	
         	pStmt.executeUpdate();
             return true;      
 	} catch (SQLException e) {
@@ -72,9 +79,10 @@ public class DaoRol implements RolInterface{
 	try {
 		pStmt = dbConnection.prepareStatement(updateQuery);		
 		pStmt.setString(1, obj.getNombres());
-		pStmt.setString(2, obj.getPrivilegios());
+                pStmt.setInt(2, obj.getPrivilegios().getIdpriv());
+		pStmt.setInt(3, obj.getId());
 		pStmt.executeUpdate();
-                     return true;
+                 return true;
 	} catch (SQLException e) {
 		System.err.println(e.getMessage());
                 return false;
@@ -90,15 +98,19 @@ public class DaoRol implements RolInterface{
 		  pStmt.setInt(1,id);	
                   ResultSet rs = pStmt.executeQuery();                 
 		while (rs.next()) {
-			 rol.setId(rs.getInt(1));
-			 rol.setNombres(rs.getString(2));
-                         rol.setPrivilegios(rs.getString(3));		
+			rol.setId(rs.getInt(1));
+			rol.setNombres(rs.getString(2));   
+                        Privilegios pri = daoPrivilegios.buscarPorID(rs.getInt(3));
+                        rol.setPrivilegios(pri); 
 		} 	
 	} catch (SQLException e) {
 		System.err.println(e.getMessage());
 	}   
         return  rol;   
     }
+
+   
+
 
 
 }

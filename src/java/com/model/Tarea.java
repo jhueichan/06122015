@@ -6,8 +6,7 @@ import java.sql.Date;
 public class Tarea {
     private  int id;
     private  String nombreTarea,estadoTarea;
-    private  Date fechaInicio, fechaTermino;
-    
+    private  Date fechaInicio, fechaTermino;    
     private Proyecto proyecto;
     private Empleado responsable;
 

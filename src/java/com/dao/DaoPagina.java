@@ -3,6 +3,9 @@ package com.dao;
 
 import com.service.PaginaInterface;
 import com.model.Pagina;
+import com.model.Privilegios;
+import com.model.PrivilegiosPagina;
+import com.model.Rol;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DaoPagina  implements PaginaInterface{
-      PreparedStatement pStmt;  
-
+     PreparedStatement pStmt;  
+         
     public DaoPagina() {
     }
 
@@ -46,7 +49,8 @@ public class DaoPagina  implements PaginaInterface{
 	} catch (SQLException e) {
 		System.err.println(e.getMessage());
 	}
-	return PaginaS; }
+	return PaginaS; 
+    }
 
     @Override
     public boolean ingresar(Pagina obj) throws Exception {
@@ -96,5 +100,7 @@ public class DaoPagina  implements PaginaInterface{
 	}   
         return  pagina;  
     }
-      
+
+
+    
 }
